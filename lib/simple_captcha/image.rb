@@ -56,9 +56,9 @@ module SimpleCaptcha #:nodoc
 
         params = ImageHelpers.image_params(SimpleCaptcha.image_style).dup
         params << "-size #{SimpleCaptcha.image_size} xc:transparent"
-        params << "-gravity \"Center\""
+        params << "-gravity \"North\""
         if params.join(' ').index('-pointsize').nil?
-          params << "-pointsize 35"
+          params << "-pointsize 20"
         end
         # params << "-implode 0.2"
 
@@ -67,17 +67,17 @@ module SimpleCaptcha #:nodoc
 
         text.split(//).each_with_index do |letter, index|
           i = -60 + (index*25) + rand(-6..6)
-          params << "-draw \"translate #{i},#{rand(-6..6)} skewX #{rand(-15..15)} gravity center text 0,0 '#{letter}'\" "
+          params << "-draw \"translate #{i},#{rand(-6..6)} skewX #{rand(-15..15)} gravity North text 0,0 '#{letter}'\" "
         end
-        
+
         params << "-wave #{amplitude}x#{frequency}"
-        
+
         (1..10).each do |i|
           params << "-draw \"polyline #{rand(160)},#{rand(61)} #{rand(160)},#{rand(62)}\""
         end
-        
+
         params << "\"#{File.expand_path(dst.path)}\""
-        
+
         # puts "convert " +  params.join(' ')
         SimpleCaptcha::Utils::run("convert", params.join(' '))
 
