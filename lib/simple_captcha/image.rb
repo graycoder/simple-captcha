@@ -67,7 +67,7 @@ module SimpleCaptcha #:nodoc
 
         text.split(//).each_with_index do |letter, index|
           i = -60 + (index*25) + rand(-6..6)
-          params << "-draw \"translate #{i},#{rand(-6..6)} skewX #{rand(-15..15)} gravity North text 0,0 '#{letter}'\" "
+          params << "-draw \"translate #{i},#{rand(-6..6)} skewX #{rand(-15..15)} gravity Center text 0,0 '#{letter}'\" "
         end
 
         params << "-wave #{amplitude}x#{frequency}"
